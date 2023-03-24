@@ -171,7 +171,7 @@ const Handle = forwardRef<HTMLDivElement, HandleComponentProps>(
           {
             source: !isTarget,
             target: isTarget,
-            connectable: isConnectable,
+            connectable: handleConnectable,
             connectablestart: isConnectableStart,
             connectableend: isConnectableEnd,
             connecting: clickConnecting,
