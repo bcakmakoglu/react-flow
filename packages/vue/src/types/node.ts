@@ -28,7 +28,7 @@ export type Node<
   resizing?: boolean;
   /** Whether the node can be focused for keyboard interaction (a11y). */
   focusable?: boolean;
-  /** ARIA role applied to the node element. */
+  /** The ARIA role attribute for the node element, used for accessibility. */
   ariaRole?: string;
   /** General escape hatch for adding custom attributes to the node's DOM element. */
   domAttributes?: Omit<
@@ -60,11 +60,11 @@ export type InternalNode<NodeType extends Node = Node> = InternalNodeBase<NodeTy
  * selection and dragging. Your custom node receives `NodeProps` as props.
  */
 export interface NodeProps<NodeType extends Node = Node> {
-  /** The node's id. */
+  /** Unique id of a node. */
   id: string;
-  /** Arbitrary user data attached to the node. */
+  /** Arbitrary data passed to a node. */
   data: NodeType['data'];
-  /** The node's type — the key it was registered under in `nodeTypes`. */
+  /** Type of node defined in `nodeTypes`. */
   type: NodeType['type'];
   /** Whether the node is currently selected. */
   selected: boolean;
@@ -72,9 +72,9 @@ export interface NodeProps<NodeType extends Node = Node> {
   selectable: boolean;
   /** Whether the node can be deleted. */
   deletable: boolean;
-  /** Whether the node can be dragged. */
+  /** Whether or not the node is able to be dragged. */
   draggable: boolean;
-  /** Whether the node is currently being dragged. */
+  /** Whether or not the node is currently being dragged. */
   dragging: boolean;
   /** The node's z-index. */
   zIndex: number;
@@ -88,13 +88,22 @@ export interface NodeProps<NodeType extends Node = Node> {
   width?: NodeType['width'];
   /** The node's height, in pixels. */
   height?: NodeType['height'];
-  /** Default side the node's source handles are placed on, see {@link Position}. */
+  /**
+   * Only relevant for default, source, target nodeType. Controls source position.
+   * @example 'right', 'left', 'top', 'bottom'
+   */
   sourcePosition?: NodeType['sourcePosition'];
-  /** Default side the node's target handles are placed on, see {@link Position}. */
+  /**
+   * Only relevant for default, source, target nodeType. Controls target position.
+   * @example 'right', 'left', 'top', 'bottom'
+   */
   targetPosition?: NodeType['targetPosition'];
-  /** CSS selector limiting which child element starts a drag. */
+  /**
+   * A class name that can be applied to elements inside the node that allows those elements to act
+   * as drag handles, letting the user drag the node by clicking and dragging on those elements.
+   */
   dragHandle?: NodeType['dragHandle'];
-  /** Id of the parent node when this node is nested inside another. */
+  /** Parent node id, used for creating sub-flows. */
   parentId?: NodeType['parentId'];
 }
 

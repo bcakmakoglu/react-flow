@@ -6,7 +6,7 @@ import type { ClassValue, Styles } from './flow';
 export type EdgeReconnectable = boolean | 'target' | 'source';
 
 export interface EdgeLabelOptions {
-  /** Inline style applied to the label text. */
+  /** Custom styles to apply to the label. */
   labelStyle?: CSSProperties;
   /** Render a background rectangle behind the label. */
   labelShowBg?: boolean;
@@ -100,18 +100,18 @@ export type DefaultEdgeOptions = DefaultEdgeOptionsBase<Edge>;
  * markers are pre-resolved to url strings.
  */
 export interface EdgeProps<EdgeType extends Edge = Edge> extends EdgeLabelOptions, EdgePosition {
-  /** The edge's id. */
+  /** Unique id of an edge. */
   id: string;
-  /** Id of the source node. */
+  /** Id of source node. */
   source: string;
-  /** Id of the target node. */
+  /** Id of target node. */
   target: string;
-  /**
-   * The edge's type — the key it was registered under in `edgeTypes`. Genuinely `undefined` at
-   * runtime when the user didn't set one, since defaults are no longer stamped onto stored edges.
-   */
+  /** Type of edge defined in `edgeTypes`. */
   type?: EdgeType['type'];
-  /** The label or custom element to render along the edge. */
+  /**
+   * The label or custom element to render along the edge. This is commonly a text label or some
+   * custom controls.
+   */
   label?: string | VNode | Component<EdgeTextProps>;
   /** Inline style applied to the edge path. */
   style?: CSSProperties;
@@ -121,9 +121,9 @@ export interface EdgeProps<EdgeType extends Edge = Edge> extends EdgeLabelOption
   selectable?: boolean;
   /** Whether the edge can be deleted. */
   deletable?: boolean;
-  /** Id of the source handle, or `null` when the source node has a single handle. */
+  /** Id of source handle, only needed if there are multiple handles per node. */
   sourceHandleId?: string | null;
-  /** Id of the target handle, or `null` when the target node has a single handle. */
+  /** Id of target handle, only needed if there are multiple handles per node. */
   targetHandleId?: string | null;
   /** Whether the edge path is animated. */
   animated?: boolean;
@@ -139,9 +139,12 @@ export interface EdgeProps<EdgeType extends Edge = Edge> extends EdgeLabelOption
   markerEnd?: string;
   /** Curvature of the default bezier path, between 0 and 1. */
   curvature?: number;
-  /** Width of the invisible interaction area around the edge, in pixels. */
+  /**
+   * The width of the invisible area around the edge that the user can interact with. This is useful
+   * for making the edge easier to click or hover over.
+   */
   interactionWidth?: number;
-  /** Arbitrary user data attached to the edge. */
+  /** Arbitrary data passed to an edge. */
   data?: EdgeType['data'];
 }
 
@@ -149,7 +152,7 @@ export interface EdgeProps<EdgeType extends Edge = Edge> extends EdgeLabelOption
  * BaseEdge component props.
  */
 export interface BaseEdgeProps extends EdgeLabelOptions {
-  /** The edge's id. */
+  /** Unique id of an edge. */
   id?: string;
   /** The x position of edge label. */
   labelX?: number;
