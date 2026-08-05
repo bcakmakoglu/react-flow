@@ -130,9 +130,15 @@ export interface VueFlowProps<NodeType extends Node = Node, EdgeType extends Edg
    * @default []
    */
   edges?: EdgeType[];
-  /** Register custom edge components by type. Alternatively, use the `#edge-<type>` slots. */
+  /**
+   * Custom edge types to be available in a flow. Vue Flow matches an edge's type to a component in
+   * the `edgeTypes` object. Alternatively, register edge components with the `#edge-<type>` slots.
+   */
   edgeTypes?: EdgeTypesObject<EdgeType>;
-  /** Register custom node components by type. Alternatively, use the `#node-<type>` slots. */
+  /**
+   * Custom node types to be available in a flow. Vue Flow matches a node's type to a component in
+   * the `nodeTypes` object. Alternatively, register node components with the `#node-<type>` slots.
+   */
   nodeTypes?: NodeTypesObject<NodeType>;
   /**
    * A loose connection mode will allow you to connect handles with differing types, including
